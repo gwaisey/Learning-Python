@@ -32,6 +32,6 @@ python scripts/analytics.py
 
 # 3. Run Web Dashboard (in a new terminal tab)
 python web-app/data_api.py
-
+```
 ---
 *Developed by [Grace Mae](https://github.com/gwaisey) during my internship journey.*
