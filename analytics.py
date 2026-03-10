@@ -1,4 +1,23 @@
 # Program Analisis Inventory Mechanical Keyboard - Grace Mae
+import json
+
+# Anggap saja data ini dikirim dari aplikasi Laravel atau JS kamu
+json_data = '''
+[
+    {"item": "Ajazz AK820 Max", "stock": 5, "price": 750000},
+    {"item": "Haimu Heartbeat Silent", "stock": 90, "price": 7000}
+]
+'''
+
+def process_external_data(raw_json):
+    # Python mengubah string JSON menjadi List/Dictionary
+    data = json.loads(raw_json)
+    print("--- Memproses Data dari Sumber Eksternal ---")
+    for item in data:
+        print(f"Menganalisis: {item['item']}...")
+
+process_external_data(json_data)
+
 inventory_data = [
     {"item": "Ajazz AK820 Max", "stock": 5, "price": 750000},
     {"item": "Haimu Heartbeat Silent", "stock": 90, "price": 7000},
