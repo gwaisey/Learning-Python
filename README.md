@@ -5,7 +5,9 @@ Welcome to my Python learning journey! As a Computer Science student and Softwar
 ## 🚀 Purpose
 The goal of this repo is to build a solid foundation in Python by migrating logic from my previous projects (like Inventory Management) and exploring Python's unique capabilities in data processing and automation.
 
-## 📁 Current Projects
+## 📁 Project Structure
+- `scripts/`: Contains Python scripts for terminal-based data analytics.
+- `web-app/`: Contains Flask-based web applications for visual dashboards.
 
 ### ⌨️ Keyboard Inventory Analytics
 A script designed to manage and analyze stock for mechanical keyboard components (switches, keycaps, and kits).
