@@ -1,53 +1,38 @@
-def analyze_inventory(data):
-    print("\n" + "="*55)
-    print("=== ⌨️  KEYBOARD ASSET ANALYTICS BY GRACE ===")
-    print(f"{'Item':<25} | {'Stock':<5} | {'Total Value':>15}")
-    print("-" * 55)
-    
-    grand_total = 0
-    for product in data:
-        subtotal = product['stock'] * product['price']
-        grand_total += subtotal
-        alert = "⚠️ " if product['stock'] <= 5 else "✅ "
-        print(f"{alert + product['item']:<25} | {product['stock']:<5} | Rp{subtotal:>14,}")
+import json
+import os
 
-    print("-" * 55)
-    print(f"Total Nilai Aset  : Rp{grand_total:>14,}")
-    print("=" * 55 + "\n")
+# --- PERBAIKAN PATH DISINI ---
+# Mencari lokasi folder utama 'Learning-Python' secara otomatis
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
+DB_FILE = os.path.join(BASE_DIR, "..", "inventory.json")
+
+def load_data():
+    if os.path.exists(DB_FILE):
+        try:
+            with open(DB_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            return []
+    return []
+
+def save_data(data):
+    # Memastikan data benar-benar tertulis ke file yang tepat
+    with open(DB_FILE, 'w') as f:
+        json.dump(data, f, indent=4)
+    # Debugging: print lokasi file aslinya untuk memastikan
+    print(f"DEBUG: File disimpan di {os.path.abspath(DB_FILE)}")
 
 def main():
-    # Kita mulai dengan list kosong
-    my_inventory = []
+    inventory = load_data()
+    print("--- Program Input Inventory Terintegrasi ---")
     
-    print("Selamat Datang di Program Input Inventory Grace!")
+    nama = input("Nama Barang: ")
+    stok = int(input("Stok: "))
+    harga = int(input("Harga: "))
     
-    while True:
-        print("\n[1] Tambah Barang Baru")
-        print("[2] Lihat Laporan & Selesai")
-        print("[q] Keluar")
-        
-        pilihan = input("Pilih menu: ")
-        
-        if pilihan == '1':
-            nama = input("Nama komponen keyboard: ")
-            stok = int(input("Jumlah stok (angka): "))
-            harga = int(input("Harga per unit (angka): "))
-            
-            # Memasukkan data ke dalam list
-            my_inventory.append({"item": nama, "stock": stok, "price": harga})
-            print(f"✅ {nama} berhasil ditambahkan!")
-            
-        elif pilihan == '2':
-            if not my_inventory:
-                print("Inventory masih kosong, isi dulu yuk!")
-            else:
-                analyze_inventory(my_inventory)
-                break # Keluar dari loop setelah cetak laporan
-                
-        elif pilihan.lower() == 'q':
-            break
-        else:
-            print("Pilihan tidak valid!")
+    inventory.append({"item": nama, "stock": stok, "price": harga})
+    save_data(inventory)
+    print("✅ Data tersimpan ke JSON!")
 
 if __name__ == "__main__":
     main()
